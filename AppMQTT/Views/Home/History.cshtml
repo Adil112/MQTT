@@ -17,9 +17,46 @@
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.setOnLoadCallback(drawChart);
 
+        function drawChart() {
+            $(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: '/Home/GetJSON',
+                    success: function (chartsdata) {
+                        //get JSONList from Object
+                        var Data = chartsdata.JSONList;
+                        var data = new google.visualization.DataTable();
 
-        /*function drawChart() {
-            var data = google.visualization.arrayToDataTable([
+                        data.addColumn('string', 'CategoryName');
+                        data.addColumn('number', 'PostCount');
+
+                        for (var i = 0; i < Data.length; i++) {
+                            data.addRow([Data[i].Data, Data[i].Time]);
+                        }
+
+                        // Instantiate and draw our chart, passing in some options
+                        var chart = new google.visualization.PieChart(document.getElementById('chartdiv'));
+
+                        //Draw pie chart command with data and chart options
+                        chart.draw(data,
+                            {
+                                title: "Google pie Chart in ASP.NET MVC",
+                                position: "top",
+                                fontsize: "14px",
+                            });
+
+                    },
+                    error: function () {
+                        alert("Error loading data! Please try again.");
+                    }
+                });
+            })
+
+        }
+        {function drawChartrrrrr() {
+
+            var data = google.visualization.arrayToDataTable(
+                /*[
                 ['Время', 'Значение'],
                 ['4', 10],
                 ['5', 9.5],
@@ -30,7 +67,8 @@
                 ['10', 10],
                 ['11', 9],
                 ['12', 10]
-            ]) */
+                ]*/
+            )
 
 
             var options = {
@@ -39,11 +77,11 @@
                 // legend: { position: 'bottom' }
 
                 hAxis: {
-                    title: 'День',
+                    title: 'Метка времени',
                     logScale: true
                 },
                 vAxis: {
-                    title: 'Градусы цельсия',
+                    title: 'Ед измерения',
                     logScale: false
                 },
             };
@@ -51,7 +89,8 @@
             var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
             chart.draw(data, options);
-        }
+        }}
+        
     </script>
 </head>
 
@@ -74,9 +113,9 @@
         <button class="par" style="top: 70%"><div class="v">Параметр 3</div></button>
 
         <div class="per">Период</div>
-        <input name ="time1" type="datetime-local" style="position: absolute; width: 20%; height: 3.8%; left: 32.3%; top: 11.13%; border: 1px solid #000000; box-sizing: border-box;">
+        <input name="time1" type="datetime-local" style="position: absolute; width: 20%; height: 3.8%; left: 32.3%; top: 11.13%; border: 1px solid #000000; box-sizing: border-box;">
         <p><strong>&#8212&#8212</strong></p>
-        <input name ="time2" type="datetime-local" style="position: absolute; width: 20%; height: 3.8%; left: 59.1%; top: 11.13%; border: 1px solid #000000; box-sizing: border-box;">
+        <input name="time2" type="datetime-local" style="position: absolute; width: 20%; height: 3.8%; left: 59.1%; top: 11.13%; border: 1px solid #000000; box-sizing: border-box;">
         <button type="submit" class="pos"><div class="posm">Посмотреть</div></button>
     </form>
 
@@ -84,4 +123,5 @@
     <div id="curve_chart" class="rab"></div>
 
 </body>
+
 </html>

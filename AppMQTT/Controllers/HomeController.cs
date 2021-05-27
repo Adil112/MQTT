@@ -22,6 +22,7 @@ namespace AppMQTT.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+        Graph[] mainGr;
         private readonly SignalsRepository SignalsRepository;
         private readonly ILogger<HomeController> _logger;
         private string _ip = "5.136.92.21";
@@ -75,26 +76,32 @@ namespace AppMQTT.Controllers
         {
             var data = SignalsRepository.FindByData(time1, time2);
             int i = 0;
-            String[] d = new string[data.Count()];
-            DateTime[] t = new DateTime[data.Count()];
-
+            Graph[] gr = new Graph[data.Count()];
             foreach (var a in data)
             {
-                d[i] = a.Data;
-                t[i] = a.Time;
+                Graph g = new Graph { Data = a.Data, Time = a.Time };
+                gr[i] = g;
                 i++;
             }
-            ViewBag.Data = d;
-            ViewBag.Time = t;
+            ViewBag.Data = gr;
+            mainGr = gr;
             return View();
         }
-        
+        public JsonResult GetJSON()
+        {
+            return Json(new { JSONList = mainGr });
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+    }
+    public class Graph
+    {
+        public string Data { get; set; }
+        public DateTime Time {get; set;}
     }
 
 }

@@ -17,7 +17,7 @@
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.setOnLoadCallback(drawChart);
 
-        function drawChart() {
+        {  /*function drawChart() {
             $(function () {
                 $.ajax({
                     type: 'GET',
@@ -52,11 +52,11 @@
                 });
             })
 
-        }
-        {function drawChartrrrrr() {
+        }*/}
+        function drawChart() {
 
             var data = google.visualization.arrayToDataTable(
-                /*[
+                [
                 ['Время', 'Значение'],
                 ['4', 10],
                 ['5', 9.5],
@@ -67,7 +67,7 @@
                 ['10', 10],
                 ['11', 9],
                 ['12', 10]
-                ]*/
+                ]
             )
 
 
@@ -89,7 +89,7 @@
             var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
             chart.draw(data, options);
-        }}
+        }
         
     </script>
 </head>

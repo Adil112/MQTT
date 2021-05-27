@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+<a asp-action="history" asp-controller="Home">История</a>
+<form method="post">
+    <p>
+        <label>Topic:</label><br />
+        <input type="text" name="theme" />
+    </p>
+    <p>
+        <label>Message:</label><br />
+        <input type="text" name="Message" />
+    </p>
+    <p>
+        <label>Username:</label><br />
+        <input type="text" name="username" />
+    </p>
+    <p>
+        <label>Password:</label><br />
+        <input type="text" name="password" />
+    </p>
+    <p>
+        <input type="submit" value="Отправить" />
+    </p>
+</form>

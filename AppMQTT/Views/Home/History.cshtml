@@ -1,0 +1,87 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="~/css/main(history).css">
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <!-- <script type="text/javascript" src="chartist.js"> </script> -->
+
+    <script src="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+
+        /*function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Время', 'Значение'],
+                ['4', 10],
+                ['5', 9.5],
+                ['6', 8],
+                ['7', 9],
+                ['8', 8.5],
+                ['9', 8],
+                ['10', 10],
+                ['11', 9],
+                ['12', 10]
+            ]) */
+
+
+            var options = {
+                title: 'Название графика',
+                // curveType: 'function', сглаживание кривой
+                // legend: { position: 'bottom' }
+
+                hAxis: {
+                    title: 'День',
+                    logScale: true
+                },
+                vAxis: {
+                    title: 'Градусы цельсия',
+                    logScale: false
+                },
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+
+<body>
+
+    <ul class="menu">
+        <li><a href="real.html">Текущий момент</a></li>
+        <li><a href="history.html">Архив</a></li>
+
+    </ul>
+
+
+    <label class="vd">Выбор данных:</label>
+
+    <form action="/Home/History" method="post">
+
+        <button class="par" style="top: 40%"><div class="v">Все</div></button>
+        <button class="par" style="top: 50%"><div class="v">Параметр 1</div></button>
+        <button class="par" style="top: 60%"><div class="v">Параметр 2</div></button>
+        <button class="par" style="top: 70%"><div class="v">Параметр 3</div></button>
+
+        <div class="per">Период</div>
+        <input name ="time1" type="datetime-local" style="position: absolute; width: 20%; height: 3.8%; left: 32.3%; top: 11.13%; border: 1px solid #000000; box-sizing: border-box;">
+        <p><strong>&#8212&#8212</strong></p>
+        <input name ="time2" type="datetime-local" style="position: absolute; width: 20%; height: 3.8%; left: 59.1%; top: 11.13%; border: 1px solid #000000; box-sizing: border-box;">
+        <button type="submit" class="pos"><div class="posm">Посмотреть</div></button>
+    </form>
+
+    <!-- <div class="rab"></div> -->
+    <div id="curve_chart" class="rab"></div>
+
+</body>
+</html>

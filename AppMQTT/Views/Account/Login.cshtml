@@ -1,0 +1,39 @@
+﻿@model AppMQTT.Models.LoginModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="~/css/style(log).css" />
+</head>
+
+<body>
+    <div id="wrapper">
+        <form name="login-form" class="login-form" action="" method="post">
+            
+            <div class="header">
+                <h1>Авторизация</h1>
+                <span>Введите ваши регистрационные данные для входа в ваш личный кабинет. </span>
+            </div>
+
+            <div class="content">
+                <input name="Login" type="text" class="input username" value="Логин" onfocus="this.value=''" asp-for="Login" />
+                <span asp-validation-for="Login" />
+                <input name="Password" type="password" class="input password" value="Пароль" onfocus="this.value=''" asp-for="Password" />
+                <span asp-validation-for="Password" />
+            </div>
+
+            <div class="footer">
+                <input type="submit" name="submit" value="ВОЙТИ" class="button" />
+                <a asp-action="Register" asp-controller="Account">Регистрация</a>
+                <!-- <input type="submit" name="submit" value="Регистрация" class="register" /> -->
+            </div>
+
+        </form>
+    </div>
+
+
+</body>
+</html>

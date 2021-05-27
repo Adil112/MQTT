@@ -153,7 +153,7 @@ FOOTER
 	/* margin-left: 20%; */
 	/* right: 16%;*/
 	margin-top: 2.4%; 
-	transform: translate(-35%, 0);
+	transform: translate(-45%, 0);
 	
 	
 	font-family: 'Bree Serif', serif;
@@ -193,7 +193,7 @@ FOOTER
 }
 
 .login-form .footer .text {
-	margin-left: 18%;
+	margin-left: 25%;
 	margin-top: 3.2%;
 	font-size: 0.877vw;
 	color: #5d7d7e;

@@ -1,10 +1,11 @@
-﻿@{
+﻿@model AppMQTT.Models.HistoryDatas
+@{
     Layout = null;
 }
 <!DOCTYPE html>
 <html>
 <head>
-
+   
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
     <link rel="stylesheet" type="text/css" href="~/css/main(history).css">
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
@@ -16,61 +17,16 @@
     <script type="text/javascript">
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.setOnLoadCallback(drawChart);
-
-        {  /*function drawChart() {
-            $(function () {
-                $.ajax({
-                    type: 'GET',
-                    url: '/Home/GetJSON',
-                    success: function (chartsdata) {
-                        //get JSONList from Object
-                        var Data = chartsdata.JSONList;
-                        var data = new google.visualization.DataTable();
-
-                        data.addColumn('string', 'CategoryName');
-                        data.addColumn('number', 'PostCount');
-
-                        for (var i = 0; i < Data.length; i++) {
-                            data.addRow([Data[i].Data, Data[i].Time]);
-                        }
-
-                        // Instantiate and draw our chart, passing in some options
-                        var chart = new google.visualization.PieChart(document.getElementById('chartdiv'));
-
-                        //Draw pie chart command with data and chart options
-                        chart.draw(data,
-                            {
-                                title: "Google pie Chart in ASP.NET MVC",
-                                position: "top",
-                                fontsize: "14px",
-                            });
-
-                    },
-                    error: function () {
-                        alert("Error loading data! Please try again.");
-                    }
-                });
-            })
-
-        }*/}
+         
         function drawChart() {
 
-            var data = google.visualization.arrayToDataTable(
-                [
+            @*var data = google.visualization.arrayToDataTable
+            ([
                 ['Время', 'Значение'],
-                ['4', 10],
-                ['5', 9.5],
-                ['6', 8],
-                ['7', 9],
-                ['8', 8.5],
-                ['9', 8],
-                ['10', 10],
-                ['11', 9],
-                ['12', 10]
-                ]
-            )
+                ['@Model.Time', @Model.Value]
+            ])*@
 
-
+            var data = google.visualization.arrayToDataTable(@ViewBag.Dd)
             var options = {
                 title: 'Название графика',
                 // curveType: 'function', сглаживание кривой
@@ -90,7 +46,7 @@
 
             chart.draw(data, options);
         }
-        
+
     </script>
 </head>
 

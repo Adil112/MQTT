@@ -42,6 +42,14 @@ namespace AppMQTT.Repository
                 return dbConnection.Query<Signals>("SELECT * FROM signals WHERE time between @Date1 and @Date2", new { Date1 = date1, Date2 = date2 });
             }
         }
+        public IEnumerable<Signals> FindByData(DateTime date1, DateTime date2, string name)
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                dbConnection.Open();
+                return dbConnection.Query<Signals>("SELECT * FROM signals WHERE time between @Date1 and @Date2 and name = @Name", new { Date1 = date1, Date2 = date2, Name = name });
+            }
+        }
         public void Add(Signals item)
         {
             using (IDbConnection dbConnection = Connection)

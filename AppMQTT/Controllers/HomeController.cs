@@ -16,13 +16,13 @@ using System.Threading.Tasks;
 using AppMQTT;
 using Microsoft.AspNetCore.Authorization;
 using System.IO;
+using System.Data;
 
 namespace AppMQTT.Controllers
 {
     [Authorize]
     public class HomeController : Controller
     {
-        Graph[] mainGr;
         private readonly SignalsRepository SignalsRepository;
         private readonly ILogger<HomeController> _logger;
         private string _ip = "5.136.92.21";
@@ -58,6 +58,7 @@ namespace AppMQTT.Controllers
             }
             var recData = SignalsRepository.FindAll();
             string result = null;
+            
             foreach (var t in recData)
             {
                 result += t.Name + ' ' + t.Data + ' ' + t.Time + ' ' + t.Quality + "\n";
@@ -68,29 +69,42 @@ namespace AppMQTT.Controllers
         [HttpGet]
         public IActionResult History()
         {
-
-            return View();
+            List<History> history = new List<History>();
+            var viewModel = new History() { Time = "1", Value = "1" };
+            var viewModel2 = new History() { Time = "2", Value = "2" };
+            history.Add(viewModel);
+            history.Add(viewModel2);
+            var res = new HistoryDatas() { Histories = history };
+            return View(res);
         }
         [HttpPost]
-        public IActionResult History(DateTime time1, DateTime time2)
+        public IActionResult History(DateTime time1, DateTime time2, string name = "PLK1")
         {
             var data = SignalsRepository.FindByData(time1, time2);
-            int i = 0;
-            Graph[] gr = new Graph[data.Count()];
+            List<History> history = new List<History>();
+
+            Object[,] o = new object[2, data.Count()];
+            int i = 0; int j = 0;
+
             foreach (var a in data)
             {
-                Graph g = new Graph { Data = a.Data, Time = a.Time };
-                gr[i] = g;
-                i++;
+                var viewModel = new History()
+                {
+                    Value = a.Data,
+                    Time = a.Time.Year.ToString() + '-' + a.Time.Month.ToString() + '-' + a.Time.Day.ToString() + ' ' + a.Time.Hour.ToString() + ':' + a.Time.Minute.ToString() + ':' + a.Time.Second.ToString()
+                };
+                o[i, j] = viewModel.Time;
+                o[i+1, j] = viewModel.Value;
+                history.Add(viewModel);
+                j++;
             }
-            ViewBag.Data = gr;
-            mainGr = gr;
-            return View();
+            var res = new HistoryDatas() { Histories = history };
+            ViewBag.Dd = o;
+            return View(res);
         }
-        public JsonResult GetJSON()
-        {
-            return Json(new { JSONList = mainGr });
-        }
+
+        
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -98,10 +112,4 @@ namespace AppMQTT.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
-    public class Graph
-    {
-        public string Data { get; set; }
-        public DateTime Time {get; set;}
-    }
-
 }

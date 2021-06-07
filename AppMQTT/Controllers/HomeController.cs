@@ -38,24 +38,15 @@ namespace AppMQTT.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Index(string theme, string Message, string username, string password)
         {
-            MQTTClient mq = new MQTTClient(_config);
-            List<string> topics = new List<string>();
-            topics.Add("test1");
-            mq.ConnectAsync(_ip, "stepa", "123", topics);
-            mq.PublisherAsync("test1");
-            int i = 0;
-            await foreach (var m in mq.Receive())
-            {
-                mq.Save(m);
-                i++;
-                if (i == 2) break;
-                mq.Reconnect(topics);
-            }
+
+
+            await Task.Delay(TimeSpan.FromSeconds(5));
             var recData = SignalsRepository.FindAll();
             string result = null;
             
@@ -64,6 +55,11 @@ namespace AppMQTT.Controllers
                 result += t.Name + ' ' + t.Data + ' ' + t.Time + ' ' + t.Quality + "\n";
             }
             return Content(result);
+        }
+        [HttpGet]
+        public IActionResult Realtime()
+        {
+            return View();
         }
 
         [HttpGet]

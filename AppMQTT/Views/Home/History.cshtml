@@ -17,7 +17,7 @@
     <script type="text/javascript">
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.setOnLoadCallback(drawChart);
-         
+
         function drawChart() {
 
             @*var data = google.visualization.arrayToDataTable
@@ -26,7 +26,9 @@
                 ['@Model.Time', @Model.Value]
             ])*@
 
-            var data = google.visualization.arrayToDataTable(@ViewBag.Dd)
+            //var data = google.visualization.arrayToDataTable(@ViewBag.Dd, true)
+            
+
             var options = {
                 title: 'Название графика',
                 // curveType: 'function', сглаживание кривой

@@ -10,4 +10,5 @@ namespace AppMQTT.Models
         public string Time { get; set; }
         public string Value { get; set; }
     }
+
 }

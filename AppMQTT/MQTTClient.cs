@@ -60,16 +60,24 @@ namespace AppMQTT
                 }
             });
         }
-        public async IAsyncEnumerable<string> Receive()
+        /*public async IAsyncEnumerable<string> Receive()
+         {
+             do
+             {
+                 await Task.Delay(100);
+                 string mes = await Task.Run(() => ReceiveMesHandler(mqttClient));
+                 yield return mes;
+             }
+             while (true);
+         }*/
+        public async Task<string> ReceiveAsync()
         {
-            do
-            {
-                await Task.Delay(100);
-                string mes = await Task.Run(() => ReceiveMesHandler(mqttClient));
-                yield return mes;
-            }
-            while (true);
+            string t = null;
+            do t = await Task.Run(() => ReceiveMesHandler(mqttClient));
+            while (t == null);
+            return t;
         }
+
         static string ReceiveMesHandler(MQTTnet.Client.IMqttClient mqttClient)
         {
             string mes = null;
@@ -98,12 +106,19 @@ namespace AppMQTT
 
         public void Save(string mes)
         {
-            Signals recSign = JsonSerializer.Deserialize<Signals>(mes);
-            //if (recSign.Type == "int") recSign.Type = "1";
-            SignalsRepository.Add(recSign);
+            try
+            {
+                Signals recSign = JsonSerializer.Deserialize<Signals>(mes);
+                //if (recSign.Type == "int") recSign.Type = "1";
+                SignalsRepository.Add(recSign);
+            }
+            catch
+            {
+
+            }
         }
 
-        public async void PublisherAsync(string theme = "test1")
+        public async void PublisherAsync(string theme = "testing")
         {
             DateTime dt = DateTime.Now;
 

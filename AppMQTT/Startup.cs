@@ -25,13 +25,20 @@ namespace AppMQTT
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddSingleton<IConfiguration>(Configuration);
+
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => //CookieAuthenticationOptions
                 {
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                 });
             services.AddControllersWithViews();
+
+            services.AddSingleton<Background>();
+            services.AddSingleton<IHostedService, DataRefreshService>();
+
+                
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

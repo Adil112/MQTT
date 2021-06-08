@@ -1,4 +1,5 @@
-﻿using AppMQTT.Repository;
+﻿using AppMQTT.Models;
+using AppMQTT.Repository;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -30,6 +31,7 @@ namespace AppMQTT
         {
             Generator5000 gg = new Generator5000(_config);
             gg.GenerateMessages();
+
             await Task.Delay(TimeSpan.FromSeconds(2));
             MQTTClient mq = new MQTTClient(_config);
             List<string> topics = new List<string>();
@@ -37,7 +39,7 @@ namespace AppMQTT
             mq.ConnectAsync(_ip, "stepa", "123", topics);
             var m = mq.ReceiveAsync();
             await Task.Delay(TimeSpan.FromSeconds(2));
-            mq.Save(m.Result.ToString());
+            mq.SaveAsync(m.Result.ToString());
             mq.Reconnect(topics);
             //TimeSpan.FromSeconds(2);
         }

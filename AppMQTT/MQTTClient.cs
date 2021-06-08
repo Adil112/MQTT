@@ -11,6 +11,9 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.SignalR.Client;
+using System.Net;
 
 namespace AppMQTT
 {
@@ -104,13 +107,21 @@ namespace AppMQTT
             return mes;
         }
 
-        public void Save(string mes)
+        public void SaveAsync(string mes)
         {
+            
+            RealTime real = new RealTime();
             try
             {
                 Signals recSign = JsonSerializer.Deserialize<Signals>(mes);
                 //if (recSign.Type == "int") recSign.Type = "1";
                 SignalsRepository.Add(recSign);
+                real.Name = recSign.Name;
+                real.Data = recSign.Data;
+                real.Edizm = recSign.Edizm;
+                real.Quality = recSign.Quality;
+                real.Time = recSign.Time;
+                string mess = recSign.Name;
             }
             catch
             {

@@ -44,8 +44,6 @@ namespace AppMQTT.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(string theme, string Message, string username, string password)
         {
-
-
             await Task.Delay(TimeSpan.FromSeconds(5));
             var recData = SignalsRepository.FindAll();
             string result = null;
@@ -56,27 +54,36 @@ namespace AppMQTT.Controllers
             }
             return Content(result);
         }
-        [HttpGet]
-        public IActionResult Realtime()
-        {
-            return View();
-        }
 
         [HttpGet]
         public IActionResult History()
         {
+            var data = SignalsRepository.FindByData(DateTime.Now, DateTime.Now.AddHours(-1));
             List<History> history = new List<History>();
-            var viewModel = new History() { Time = "1", Value = "1" };
-            var viewModel2 = new History() { Time = "2", Value = "2" };
-            history.Add(viewModel);
-            history.Add(viewModel2);
-            var res = new HistoryDatas() { Histories = history };
-            return View(res);
+
+            Object[,] o = new object[2, data.Count()];
+            int i = 0; int j = 0;
+
+            foreach (var a in data)
+            {
+                var viewModel = new History()
+                {
+                    Value = a.Data,
+                    Time = a.Time.Year.ToString() + '-' + a.Time.Month.ToString() + '-' + a.Time.Day.ToString() + ' ' + a.Time.Hour.ToString() + ':' + a.Time.Minute.ToString() + ':' + a.Time.Second.ToString()
+                };
+                o[i, j] = viewModel.Time;
+                o[i + 1, j] = viewModel.Value;
+                history.Add(viewModel);
+                j++;
+            }
+            //var res = new HistoryDatas() { Histories = history };
+            ViewBag.History = history;
+            return View();
         }
         [HttpPost]
         public IActionResult History(DateTime time1, DateTime time2, string name = "PLK1")
         {
-            var data = SignalsRepository.FindByData(time1, time2);
+            var data = SignalsRepository.FindByData(time1, time2, name);
             List<History> history = new List<History>();
 
             Object[,] o = new object[2, data.Count()];
@@ -94,12 +101,23 @@ namespace AppMQTT.Controllers
                 history.Add(viewModel);
                 j++;
             }
-            var res = new HistoryDatas() { Histories = history };
-            ViewBag.Dd = o;
-            return View(res);
+            //var res = new HistoryDatas() { Histories = history };
+            ViewBag.History = history;
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Realtime()
+        {
+            Signals s = SignalsRepository.FindLast();
+            RealTime re = new RealTime();
+            re.Name = s.Name;
+            re.Quality = s.Quality;
+            re.Data = s.Data;
+            re.Edizm = s.Edizm;
+            re.Time = s.Time;
+            return View(re);
         }
 
-        
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

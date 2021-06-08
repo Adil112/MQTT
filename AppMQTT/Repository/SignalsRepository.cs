@@ -50,6 +50,14 @@ namespace AppMQTT.Repository
                 return dbConnection.Query<Signals>("SELECT * FROM signals WHERE time between @Date1 and @Date2 and name = @Name", new { Date1 = date1, Date2 = date2, Name = name });
             }
         }
+        public Signals FindLast()
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                dbConnection.Open();
+                return dbConnection.Query<Signals>("SELECT * FROM signals where name = @Name order by time desc limit 1", new { Name = "PLK1"}).FirstOrDefault();
+            }
+        }
         public void Add(Signals item)
         {
             using (IDbConnection dbConnection = Connection)

@@ -39,7 +39,7 @@ namespace AppMQTT.Controllers
                 {
                     await Authenticate(model.Login); // аутентификация
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("History", "Home");
                 }
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             }
@@ -64,7 +64,7 @@ namespace AppMQTT.Controllers
 
                     await Authenticate(model.Login); // аутентификация
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("History", "Home");
                 }
                 else
                     ModelState.AddModelError("", "Некорректные логин и(или) пароль");

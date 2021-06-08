@@ -34,11 +34,9 @@ namespace AppMQTT
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                 });
             services.AddControllersWithViews();
-
             services.AddSingleton<Background>();
             services.AddSingleton<IHostedService, DataRefreshService>();
 
-                
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,7 +64,7 @@ namespace AppMQTT
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=History}/{id?}");
             });
         }
     }

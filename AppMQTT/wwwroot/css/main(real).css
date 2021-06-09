@@ -38,8 +38,8 @@ menu {
 
 .wid {
     position: absolute;
-    width: 14%;
-    height: 18.67%;
+    width: 30%;
+    height: 50.67%;
     left: 5.21%;
     top: 12%;
 
@@ -49,7 +49,7 @@ menu {
     top: 30%;
     bottom: 0%;
 
-    background: #96DBE4;
+    background: #000000;
     border-radius: 10.4%;
 }
 

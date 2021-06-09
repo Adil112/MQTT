@@ -1,0 +1,178 @@
+body {
+    width: 1440px;
+    height: 1024px;
+    width: 100%;
+    height: 100%;
+    background: #455D64 17.65%;
+    /* Градиент */
+    background: linear-gradient(335.59deg, #455D64 17.65%, #89B6C0 79.69%) fixed;
+}
+
+menu {
+    list-style: none; /*убираем маркеры списка*/
+    margin: 0; /*убираем верхнее и нижнее поле, равное 1em*/
+    padding-left: 0; /*убираем левый отступ, равный 40px*/
+}
+
+.menu a {
+    text-decoration: none; /*убираем подчеркивание текста ссылок*/
+    font-family: Roboto;
+    color: #000000;
+    display: inline-block;
+    padding: 0.5%;
+    font-size: 1.042vw;
+    line-height: 1.198vw;
+    background: rgba(255, 255, 255, 0.2);
+    /* border: 1px solid #000000; */
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.menu li {
+    display: inline;
+}
+
+div {
+    /* Текст */
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.250vw;
+    line-height: 1.458vw;
+    /* display: flex;
+    align-items: center;
+    text-align: center; */
+
+    color: #000000;
+}
+
+.vd {
+    /* Выбор данных */
+    position: absolute;
+    left: 3.20%;
+    right: 83.95%;
+    top: 33.11%;
+    bottom: 60.84%;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.250vw;
+    line-height: 1.458vw;
+}
+
+.per {
+    position: absolute;
+    left: 22.5%;
+    right: 69.24%;
+    top: 11.53%;
+    bottom: 85.84%;
+}
+
+.posm {
+    position: absolute;
+    left: 15.69%;
+    right: 16.99%;
+    top: 20%;
+    bottom: 20%;
+    font-size: 0.938vw;
+    line-height: 1.094vw;
+}
+
+.v {
+    position: absolute;
+    left: 6.03%;
+    right: 8.62%;
+    top: 26.67%;
+    bottom: 26.67%;
+    font-size: 0.938vw;
+    line-height: 1.094vw;
+}
+
+button {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0.49% 1.67%;
+    background: #B7E1EE;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.pos {
+    position: absolute;
+    width: 10.63%;
+    height: 4%;
+    left: 84%;
+    top: 11%;
+}
+
+.par {
+    position: absolute;
+    width: 10.33%;
+    height: 4.39%;
+    left: 2.89%;
+}
+
+p {
+    position: absolute;
+    width: 4.9%;
+    left: 54.8%;
+    top: 10.53%;
+    /* font-family: Roboto; */
+    font-size: 0.9vw;
+}
+
+/*******************
+РАБОЧАЯ ОБЛАСТЬ
+*******************/
+.rab {
+    position: absolute;
+    width: 77.64%;
+    height: 77.05%;
+    left: 12%;
+    top: 19.6%;
+    /* background: #FAF9F9;
+    border: 2px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+    overflow-y: scroll;
+}
+
+/*******************
+ТАБЛИЦА
+*******************/
+
+table {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 14px;
+    background: white;
+    /*max-width: 70%;
+    width: 70%;*/
+    margin: auto;
+    border-collapse: collapse;
+    text-align: center;
+    /* table-layout: fixed;*/
+    /*position: absolute;*/
+    width: 57.64%;
+    height: 17.05%;
+  /*  left: 20%;*/
+    top: 19.6%;
+}
+
+th {
+    font-weight: normal;
+    color: #039;
+    border-bottom: 2px solid #6678b1;
+    padding: 10px 8px;
+}
+
+td {
+    color: #669;
+    padding: 9px 8px;
+    transition: .3s linear;
+}
+
+tr:hover td {
+    background: #dfe9ec;
+}

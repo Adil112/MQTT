@@ -132,8 +132,9 @@ namespace AppMQTT
         public async void PublisherAsync(string theme = "testing")
         {
             DateTime dt = DateTime.Now;
-
-            Signals signals1 = new Signals() { Name = "PLK1", Data = "11", Time = new DateTime(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Millisecond), Quality = 111, Edizm = "Om", Type = 1 };
+            Random rnd = new Random();
+            int a = rnd.Next(20,100);
+            Signals signals1 = new Signals() { Name = "PLK1", Data = a.ToString(), Time = new DateTime(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Millisecond), Quality = 111, Edizm = "Om", Type = 1 };
             Signals signals2 = new Signals() { Name = "PLK2", Data = "22", Time = dt, Quality = 222, Edizm = "K", Type = 1 };
             string json1 = JsonSerializer.Serialize<Signals>(signals1);
             string json2 = JsonSerializer.Serialize<Signals>(signals2);

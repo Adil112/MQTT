@@ -7,7 +7,7 @@
 <head>
    
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="~/css/main(history).css">
+    <link rel="stylesheet" type="text/css" href="~/css/main1(history).css">
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
     <!-- <script type="text/javascript" src="chartist.js"> </script> -->
 
@@ -59,30 +59,7 @@
         <li><a href="/Home/History">History</a></li>
         <li><a href="/Account/Logout">Logout</a></li>
     </ul>
-    <table>
-        <tr>
-            <th>
-                Имя
-            </th>
-            <th>
-                Email
-            </th>
-
-        </tr>
-
-        @foreach (History t in @ViewBag.History)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelUser => t.Value)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelUser => t.Time)
-                </td>
-
-            </tr>
-        }
-    </table>
+    
 
     @*<label class="vd">Выбор данных:</label>*@
 
@@ -101,7 +78,32 @@
     </form>
 
     <!-- <div class="rab"></div> -->
-    <div id="curve_chart" class="rab"></div>
+    <div id="curve_chart" class="rab">
+        <table>
+            <tr>
+                <th>
+                    Имя
+                </th>
+                <th>
+                    Email
+                </th>
+
+            </tr>
+
+            @foreach (History t in @ViewBag.History)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelUser => t.Value)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelUser => t.Time)
+                    </td>
+
+                </tr>
+            }
+        </table>
+    </div>
 
 </body>
 
